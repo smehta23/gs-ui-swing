@@ -384,7 +384,7 @@ class SwingTextBox extends TextBox {
 			g.setColor(textColor);
 			for (int i = 0; i < text.size(); i++) {
 				text.get(i).draw(g, (float) xLeft,
-						(float) yBottom + i *
+						(float) yBottom + (i + 1) *
 								(text.get(i).getAscent() + text.get(i).getDescent()));
 			}
 		}
