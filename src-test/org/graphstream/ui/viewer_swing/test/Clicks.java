@@ -62,7 +62,7 @@ public class Clicks {
                         "    text-size: 15;\n" +
                         "    shape: box;\n" +
 //                        "    size: 50px;\n" +
-                        "    text-offset: 20px, 15px;\n" +
+                        "    text-offset: 0px, 0px;\n" +
                         "    size-mode: fit;\n" +
                         "}\n" +
                         "sprite.basicBlock {\n" +
@@ -75,7 +75,7 @@ public class Clicks {
                         "}");
 
         Node a = graph.addNode("A");
-        a.setAttribute("ui.label", "Line1\nLine2\nLine3\nLine4\nLine5\nLine6\nLine7\nLine8\nLine9\nLine10\nLine11\nLine12");
+        a.setAttribute("ui.label", "Line1\nLine2");
         graph.addNode("B");
         graph.addNode("C");
         graph.addEdge("AB", "A", "B");

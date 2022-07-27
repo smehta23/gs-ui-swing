@@ -163,7 +163,7 @@ class IconAndTextOnlyText extends IconAndText {
 
 	public void render(Backend backend, DefaultCamera2D camera, double xLeft, double yBottom) {
 		this.text.render(backend, offx+xLeft,
-                offy+yBottom - text.getHeight() - offy); // subtracting offy to provide even padding on both sides and compensate for the added offy*2 on getHeight() above
+                yBottom - text.getHeight() + text.getAscent() - offy); // subtracting offy to provide even padding on both sides and compensate for the added offy*2 on getHeight() above
 	}
 }
 
