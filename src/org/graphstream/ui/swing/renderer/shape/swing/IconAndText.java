@@ -55,6 +55,8 @@ import org.graphstream.ui.swing.util.ColorManager;
 import org.graphstream.ui.swing.util.FontCache;
 import org.graphstream.ui.swing.util.ImageCache;
 
+import javax.swing.*;
+
 public abstract class IconAndText {
 	/** Overall width of the icon and text with all space and padding included. */
 	//protected double width;
@@ -91,7 +93,7 @@ public abstract class IconAndText {
 		if ( padd.size() > 1 )
 			pady = camera.getMetrics().lengthToPx(padd, 1);
 		double offx = camera.getMetrics().lengthToPx(off, 0);
-		double offy = padx;
+		double offy = offx;
 		if ( padd.size() > 1 )
 			offy = camera.getMetrics().lengthToPx(off, 1);
 
@@ -142,11 +144,11 @@ class IconAndTextOnlyText extends IconAndText {
 	}
 
 	public double getWidth() {
-		return text.getWidth()+padx*2;
+		return text.getWidth()+padx*2 + offx*2;
 	}
 
 	public double getHeight() {
-		return text.getAscent()+text.getDescent()+text.getHeight()+pady*2 ;
+		return text.getAscent()+text.getDescent()+text.getHeight()+pady*2 + offy * 2;
 	}
 
 	public void setText(Backend backend, String text) {
@@ -384,7 +386,7 @@ class SwingTextBox extends TextBox {
 			g.setColor(textColor);
 			for (int i = 0; i < text.size(); i++) {
 				text.get(i).draw(g, (float) xLeft,
-						(float) yBottom + (i + 1) *
+						(float) yBottom + i *
 								(text.get(i).getAscent() + text.get(i).getDescent()));
 			}
 		}

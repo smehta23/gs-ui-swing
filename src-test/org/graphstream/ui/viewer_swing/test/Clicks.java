@@ -62,7 +62,7 @@ public class Clicks {
                         "    text-size: 15;\n" +
                         "    shape: box;\n" +
 //                        "    size: 50px;\n" +
-                        "    padding: 10px;\n" +
+                        "    text-offset: 10px, 5px;\n" +
                         "    size-mode: fit;\n" +
                         "}\n" +
                         "sprite.basicBlock {\n" +
