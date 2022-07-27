@@ -94,7 +94,7 @@ public abstract class IconAndText {
 			pady = camera.getMetrics().lengthToPx(padd, 1);
 		double offx = camera.getMetrics().lengthToPx(off, 0);
 		double offy = offx;
-		if ( padd.size() > 1 )
+		if ( off.size() > 1 )
 			offy = camera.getMetrics().lengthToPx(off, 1);
 
 		if( style.getIconMode() != IconMode.NONE ) {
@@ -144,11 +144,11 @@ class IconAndTextOnlyText extends IconAndText {
 	}
 
 	public double getWidth() {
-		return text.getWidth()+padx*2 + offx*2;
+		return text.getWidth()+padx*2 + offx*2; // offx*2 to provide even padding on both sides.
 	}
 
 	public double getHeight() {
-		return text.getAscent()+text.getDescent()+text.getHeight()+pady*2 + offy * 2;
+		return text.getHeight()+pady*2+offy*2;
 	}
 
 	public void setText(Backend backend, String text) {
@@ -163,7 +163,7 @@ class IconAndTextOnlyText extends IconAndText {
 
 	public void render(Backend backend, DefaultCamera2D camera, double xLeft, double yBottom) {
 		this.text.render(backend, offx+xLeft,
-                offy+yBottom - this.getHeight() + this.text.getAscent());
+                offy+yBottom - text.getHeight() - offy); // subtracting offy to provide even padding on both sides and compensate for the added offy*2 on getHeight() above
 	}
 }
 
@@ -317,8 +317,7 @@ class SwingTextBox extends TextBox {
 						this.text.add(new TextLayout(textLines[i], font, TextBox.defaultFontRenderContext));
 						maxWidth = Math.max(this.text.get(i).getAdvance(), maxWidth);
 					}
-					maxHeight += this.text.get(i).getAscent()
-							+ this.text.get(i).getDescent();
+					maxHeight += this.text.get(i).getAscent() + this.text.get(i).getDescent();
 				}
 				this.bounds = new Rectangle2D.Double(
 						this.text.get(0).getBounds().getX(),
@@ -378,9 +377,9 @@ class SwingTextBox extends TextBox {
 
 				g.setColor(bgColor);
 				if(rounded) {
-					g.fill(new RoundRectangle2D.Double(xLeft-padx, yBottom-(a+pady), getWidth()+1+(padx+padx), h+(pady+pady), 6, 6));
+					g.fill(new RoundRectangle2D.Double(xLeft-padx, yBottom-(a+pady), getWidth()+(padx+padx), getHeight()+(pady+pady), 6, 6));
 				} else {
-					g.fill(new Rectangle2D.Double(xLeft-padx, yBottom-(a+pady), getWidth()+1+(padx+padx), h+(pady+pady)));
+					g.fill(new Rectangle2D.Double(xLeft-padx, yBottom-(a+pady), getWidth()+(padx+padx), getHeight()+(pady+pady)));
 				}
 			}
 			g.setColor(textColor);
